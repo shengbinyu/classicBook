@@ -1,0 +1,123 @@
+/* ===============================================================
+   经典阁 · responsive.css
+   三断点：<640（手机） / 640~1023（平板） / ≥1024（桌面）
+   =============================================================== */
+
+/* ------- 平板 640~1023 ------- */
+@media (max-width:1023px){
+  .nav-inner{padding:10px 14px;gap:10px;}
+  .brand-name{font-size:17px;letter-spacing:.14em;}
+  .nav-links{gap:2px;}
+  .nav-link{padding:5px 8px;font-size:14px;}
+  .search-box{min-width:200px;}
+
+  .siku-grid{grid-template-columns:repeat(2,1fr);gap:14px;}
+  .siku-card{min-height:180px;padding:22px 18px 22px;}
+  .siku-vertical{font-size:24px;}
+
+  .catalog-layout{grid-template-columns:1fr;}
+  .category-tree{position:static;max-height:none;}
+  .category-tree::before{
+    content:"点击展开/折叠分类";display:block;color:var(--fg-muted);
+    font-family:var(--kai);font-size:12px;margin-bottom:6px;
+  }
+
+  .reader-body-wrap{grid-template-columns:minmax(0,1fr);}
+  .reader-toc-drawer, .reader-note-aside{
+    position:fixed;z-index:100;top:64px;left:12px;right:12px;bottom:12px;
+    max-height:none;width:auto;
+    transform:translateX(-120%);transition:transform .25s;
+  }
+  .reader-toc-drawer.open, .reader-note-aside.open{transform:translateX(0);}
+  .reader-body{padding:30px 28px 200px;}
+  .reader-toolbar{top:60px;padding:6px 10px;}
+  .reader-toolbar .tb-chapter{font-size:13px;}
+
+  .bd-head{grid-template-columns:140px 1fr;gap:20px;}
+  .bd-cover{width:140px;height:190px;}
+  .bd-cover .glyph{font-size:72px;}
+  .bd-stats{grid-template-columns:repeat(4,1fr);gap:6px;}
+  .bd-stat .num{font-size:16px;}
+}
+
+/* ------- 手机 <640 ------- */
+@media (max-width:639px){
+  .site-nav{position:sticky;}
+  .nav-inner{padding:8px 12px;gap:8px;flex-wrap:wrap;}
+  .brand-logo{width:28px;height:28px;}
+  .brand-name{font-size:16px;letter-spacing:.12em;}
+
+  .nav-links{order:3;flex-basis:100%;display:none;}
+  .nav-links.open{display:flex;flex-direction:column;align-items:stretch;gap:2px;
+    padding:8px 0;border-top:1px solid var(--line);margin-top:6px;}
+  .nav-link{padding:8px 10px;font-size:15px;border-radius:4px;}
+  .nav-dropdown-menu{
+    position:static;min-width:auto;box-shadow:none;margin-top:4px;
+    max-height:40vh;
+  }
+  .dynasty-menu{columns:2;}
+
+  .nav-actions{flex:1;justify-content:flex-end;}
+  .search-box{min-width:0;flex:1;padding:3px 10px;}
+  .search-box input{padding:4px 2px;font-size:13px;}
+  .menu-toggle{display:inline-flex;}
+
+  .site-main{padding:18px 12px 80px;}
+  .page-head h1{font-size:22px;}
+
+  .siku-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .siku-card{min-height:150px;padding:16px 14px;}
+  .siku-vertical{font-size:22px;padding:6px 4px 0;}
+
+  .section-title{font-size:17px;margin:22px 0 12px;}
+  .recent-row{grid-template-columns:1fr;}
+  .book-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;}
+  .book-card{min-height:220px;padding:16px 10px 12px 38px;}
+  .book-card::before{left:6px;width:18px;}
+  .book-card .bc-category{left:7px;width:16px;font-size:11px;}
+  .book-card .bc-glyph{font-size:42px;margin:14px 0 6px;}
+  .book-card .bc-title{font-size:15px;}
+  .book-card .bc-author{font-size:11px;}
+
+  /* 阅读器：禁用左右对照双栏，强制上下；竖排保留但宽度减  */
+  .reader-body.parallel-left-right .para-block{
+    grid-template-columns:1fr;gap:0;
+  }
+  .reader-body{padding:22px 18px 220px;font-size:var(--fs,19px);}
+  .reader-body.layout-vertical{padding:26px 42px;min-height:520px;max-height:calc(100vh - 240px);}
+  .reader-toolbar{
+    top:58px;overflow-x:auto;white-space:nowrap;justify-content:flex-start;
+    gap:4px;padding:6px 8px;
+  }
+  .reader-toolbar .tb-chapter{
+    order:99;flex-basis:100%;text-align:left;padding:2px 8px 0;
+    white-space:nowrap;overflow:auto;
+  }
+  .reader-toolbar .tb-sep{display:none;}
+  .reader-float{display:flex;}
+  .drawer{width:100%;}
+
+  /* 详情页 */
+  .bd-head{grid-template-columns:1fr;gap:12px;}
+  .bd-cover{margin:0 auto;}
+  .bd-info h1{font-size:24px;letter-spacing:.1em;text-align:center;}
+  .bd-info .bd-sub{justify-content:center;}
+  .bd-tags{text-align:center;}
+  .bd-stats{grid-template-columns:repeat(2,1fr);}
+  .bd-actions{justify-content:center;}
+  .bd-chapter-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:4px;}
+  .bd-ch{padding:5px 8px;font-size:13px;}
+
+  .filter-row{gap:4px;}
+  .chip{padding:3px 8px;font-size:12px;}
+
+  .dynasty-axis{gap:4px;padding:10px;}
+  .dynasty-axis .dy-item{padding:3px 8px;font-size:12px;}
+}
+
+/* ------- 大屏 ≥ 1400 舒适阅读 ------- */
+@media (min-width:1400px){
+  .nav-inner{max-width:1380px;}
+  .site-main{max-width:1380px;}
+  .reader-shell{max-width:1280px;}
+}

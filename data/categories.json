@@ -1,0 +1,102 @@
+{
+  "siku": [
+    {
+      "id": "jing",
+      "name": "经部",
+      "brief": "圣贤之道，六经之宗。收录《易》《书》《诗》《礼》《春秋》及四书、孝经、小学之属。",
+      "children": [
+        {
+          "id": "jing-sishu",
+          "name": "四书类",
+          "children": [
+            { "id": "jing-sishu-daxue",   "name": "大学之属" },
+            { "id": "jing-sishu-zhongyong","name": "中庸之属" },
+            { "id": "jing-sishu-lunyu",   "name": "论语之属" },
+            { "id": "jing-sishu-mengzi",  "name": "孟子之属" }
+          ]
+        },
+        {
+          "id": "jing-wujing",
+          "name": "五经类",
+          "children": [
+            { "id": "jing-wujing-shijing",  "name": "诗" },
+            { "id": "jing-wujing-shangshu", "name": "书" },
+            { "id": "jing-wujing-zhouyi",   "name": "易" },
+            { "id": "jing-wujing-liji",     "name": "礼" },
+            { "id": "jing-wujing-chunqiu",  "name": "春秋" }
+          ]
+        },
+        {
+          "id": "jing-xiaojing",
+          "name": "孝经类"
+        },
+        {
+          "id": "jing-xiaoxue",
+          "name": "小学类（文字训诂）"
+        }
+      ]
+    },
+    {
+      "id": "shi",
+      "name": "史部",
+      "brief": "古今之迹，得失之林。正史、编年、纪事本末、别史、杂史、诏令奏议、传记、史钞、载记、时令、地理、职官、政书、目录、史评十五类。",
+      "children": [
+        { "id": "shi-zhengshi",  "name": "正史类（二十四史）" },
+        { "id": "shi-biannian",  "name": "编年类（春秋、通鉴）" },
+        { "id": "shi-jishi",     "name": "纪事本末类" },
+        { "id": "shi-zashi",     "name": "别史/杂史类（国语、国策）" },
+        { "id": "shi-dili",      "name": "地理类" },
+        { "id": "shi-zhiguan",   "name": "职官/政书类" },
+        { "id": "shi-ping",      "name": "史评类" }
+      ]
+    },
+    {
+      "id": "zi",
+      "name": "子部",
+      "brief": "百家之学，技艺之流。自儒、兵、法、农、医、天文算法、术数、艺术、谱录、杂家、类书、小说家，至释、道二氏。",
+      "children": [
+        { "id": "zi-rujia",    "name": "儒家（荀、扬、文中子）" },
+        { "id": "zi-daojia",   "name": "道家（老庄列）" },
+        { "id": "zi-fajia",    "name": "法家（管、商、韩）" },
+        { "id": "zi-mojia",    "name": "墨家" },
+        { "id": "zi-mingjia",  "name": "名家（公孙龙、惠施）" },
+        { "id": "zi-zongheng", "name": "纵横家（鬼谷、苏子）" },
+        { "id": "zi-zajia",    "name": "杂家（吕览、淮南）" },
+        { "id": "zi-nongjia",  "name": "农家" },
+        { "id": "zi-xiaoshuo", "name": "小说家（世说、搜神）" },
+        { "id": "zi-bingjia",  "name": "兵家（孙吴、司马法）" },
+        { "id": "zi-yixue",    "name": "医家（素问、灵枢）" },
+        { "id": "zi-shushu",   "name": "术数类" },
+        { "id": "zi-shi",      "name": "释家（佛经）" },
+        { "id": "zi-daojiao",  "name": "道教（道藏）" }
+      ]
+    },
+    {
+      "id": "ji",
+      "name": "集部",
+      "brief": "词人之翰藻，总而聚之。楚辞、别集、总集、诗文评、词曲五类，收百世之华章。",
+      "children": [
+        { "id": "ji-chuci",      "name": "楚辞类" },
+        { "id": "ji-bieji-xianqin","name": "别集·先秦汉魏六朝" },
+        { "id": "ji-bieji-tang", "name": "别集·唐" },
+        { "id": "ji-bieji-song", "name": "别集·宋" },
+        { "id": "ji-bieji-mingqing","name": "别集·明清" },
+        { "id": "ji-zongji",     "name": "总集类（文选、古文观止、唐诗三百首）" },
+        { "id": "ji-shiwenping", "name": "诗文评类（文心雕龙、诗品、六一诗话）" },
+        { "id": "ji-cige-ci",    "name": "词类（宋词三百首、漱玉、东坡乐府）" },
+        { "id": "ji-cige-qu",    "name": "曲类（元曲三百首、西厢记）" }
+      ]
+    }
+  ],
+  "dynasties": [
+    "上古", "夏", "商", "西周", "春秋", "战国", "秦", "西汉", "东汉",
+    "三国", "西晋", "东晋", "南北朝", "隋", "唐", "五代", "北宋", "南宋",
+    "辽金", "元", "明", "清"
+  ],
+  "genres": [
+    "论","说","辩","议","赞","颂","箴","铭","碑","诔","哀","吊","祭文",
+    "传","行状","墓志","表","疏","奏","封事","对","策","书","移","檄",
+    "序","引","跋","题跋","记","游记","杂记","疏解","章句","注疏",
+    "赋","辞","乐府","诗","词","曲","话本","小说","语录"
+  ]
+}

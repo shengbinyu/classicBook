@@ -1,0 +1,307 @@
+/* ===============================================================
+   经典阁 · reader.css
+   阅读器：横/竖排、对照布局、朱丝栏、注释气泡、旁栏、抽屉
+   =============================================================== */
+
+/* ---------- Shell 布局 ---------- */
+.reader-shell{
+  max-width:1180px;margin:0 auto;
+  position:relative;
+}
+.reader-toolbar{
+  position:sticky;top:64px;z-index:20;
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+  padding:8px 14px;margin-bottom:14px;
+  background:var(--card-bg);
+  border:1px solid var(--line-strong);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.reader-toolbar .tb-sep{width:1px;height:24px;background:var(--line-strong);margin:0 4px;}
+.reader-toolbar .tb-chapter{
+  flex:1;min-width:160px;text-align:center;
+  font-family:var(--kai);color:var(--fg-soft);font-size:14px;
+  padding:0 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.reader-body-wrap{
+  display:grid;
+  grid-template-columns:240px minmax(0,1fr) auto;
+  gap:18px;align-items:start;
+}
+
+/* ---------- 目录抽屉 ---------- */
+.reader-toc-drawer{
+  position:sticky;top:130px;max-height:calc(100vh - 160px);overflow:auto;
+  padding:14px;background:var(--card-bg);
+  border:1px solid var(--line);border-radius:var(--radius);
+  font-family:var(--serif);font-size:14px;
+}
+.reader-toc-drawer h4{
+  font-family:var(--serif-heavy);font-size:15px;color:var(--cinnabar);margin-bottom:10px;
+  padding-bottom:6px;border-bottom:1px solid var(--line-strong);
+}
+.toc-vol{margin-bottom:10px;}
+.toc-vol-title{
+  cursor:pointer;user-select:none;
+  padding:5px 4px;border-radius:3px;font-weight:700;color:var(--fg);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.toc-vol-title:hover{background:var(--bg-2);}
+.toc-vol-title .chev{transition:transform .2s;}
+.toc-vol.collapsed .chev{transform:rotate(-90deg);}
+.toc-vol.collapsed .toc-vol-list{display:none;}
+.toc-vol-list{padding-left:8px;margin-top:2px;}
+.toc-chapter{
+  display:block;padding:4px 6px;border-radius:3px;color:var(--fg-soft);cursor:pointer;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.toc-chapter:hover{background:var(--bg-2);color:var(--fg);}
+.toc-chapter.active{background:rgba(178,58,51,.12);color:var(--cinnabar);font-weight:700;}
+
+/* ---------- 正文区核心 ---------- */
+.reader-body{
+  min-width:0;padding:44px 48px 180px;
+  background:var(--card-bg);
+  border:1px solid var(--line-strong);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  counter-reset:para;
+  font-size:var(--fs,18px);
+  line-height:calc(var(--lh,1.8) * 1em);
+  font-family:var(--serif);
+  color:var(--fg);
+}
+html[data-theme="scroll"] .reader-body{
+  background:var(--paper-deep);
+  box-shadow:0 10px 40px rgba(60,46,20,.22),inset 0 0 200px rgba(158,135,77,.18);
+}
+.reader-header{
+  text-align:center;margin-bottom:28px;padding-bottom:18px;
+  border-bottom:1px dashed var(--line-strong);
+}
+.reader-header .book{
+  font-family:var(--kai);font-size:14px;color:var(--cinnabar);letter-spacing:.3em;margin-bottom:4px;
+}
+.reader-header .vol{
+  font-family:var(--serif-heavy);font-size:16px;color:var(--fg-soft);margin-bottom:10px;letter-spacing:.1em;
+}
+.reader-header h1.chapter{
+  font-family:var(--serif-heavy);font-size:26px;color:var(--fg);letter-spacing:.14em;
+}
+
+.para-block{margin-bottom:28px;position:relative;}
+.para-block::before{
+  counter-increment:para;
+  content:counter(para);
+  position:absolute;left:-24px;top:.2em;
+  font-family:var(--kai);font-size:12px;color:var(--fg-muted);
+}
+
+/* 原文段落 */
+.para-original{
+  font-family:var(--serif);
+  font-size:1em;
+  color:var(--fg);
+  text-indent:2em;
+  letter-spacing:.02em;
+  margin:0;
+}
+/* 译文段落 */
+.para-translation{
+  font-family:var(--kai);
+  font-size:.9em;
+  color:var(--fg-soft);
+  text-indent:2em;
+  margin:.4em 0 0;
+  padding:6px 12px;
+  background:rgba(46,91,138,.05);
+  border-left:2px solid var(--stone-blue);
+  border-radius:0 4px 4px 0;
+}
+/* 段落内注释上标 */
+.note-mark{
+  display:inline-block;min-width:1.2em;
+  margin:0 1px;padding:0 2px;
+  color:var(--cinnabar);font-family:var(--kai);
+  font-size:.75em;font-weight:700;vertical-align:super;line-height:1;
+  cursor:pointer;border-radius:3px;
+  transition:background .15s;
+}
+.note-mark:hover,.note-mark.active{background:rgba(178,58,51,.18);}
+
+/* ---------- 对照模式（parallel） ---------- */
+/* parallel-original：仅原文（默认） */
+.reader-body.parallel-original .para-translation{display:none;}
+/* parallel-translation：仅译文 */
+.reader-body.parallel-translation .para-original{display:none;}
+.reader-body.parallel-translation .para-translation{
+  background:none;border:0;color:var(--fg);font-size:1em;
+  text-indent:2em;padding:0;
+}
+/* parallel-top-bottom：上下叠加（default） */
+.reader-body.parallel-top-bottom .para-original,
+.reader-body.parallel-top-bottom .para-translation{display:block;}
+.reader-body.parallel-top-bottom .para-block{
+  border-bottom:1px dashed var(--line);padding-bottom:18px;
+}
+/* parallel-left-right：左右双栏 */
+.reader-body.parallel-left-right .para-block{
+  display:grid;grid-template-columns:1fr 1fr;gap:18px;
+  padding:12px 0;margin-bottom:12px;border-bottom:1px dashed var(--line);
+}
+.reader-body.parallel-left-right .para-original,
+.reader-body.parallel-left-right .para-translation{
+  background:none;border:0;padding:0;text-indent:2em;
+}
+.reader-body.parallel-left-right .para-original{
+  font-size:1em;color:var(--fg);
+}
+.reader-body.parallel-left-right .para-translation{
+  font-size:.9em;color:var(--fg-soft);
+  border-left:0;
+}
+
+/* ---------- 竖排布局 ---------- */
+.reader-body.layout-vertical{
+  writing-mode:vertical-rl;
+  text-orientation:upright;
+  max-height:calc(100vh - 220px);
+  min-height:640px;
+  overflow-x:auto;overflow-y:hidden;
+  padding:36px 60px;
+  font-family:"Noto Serif CJK TC","Songti TC","STKaiti","KaiTi",var(--serif);
+  /* 朱丝栏：用 linear-gradient 做竖格 */
+  background-image:
+    linear-gradient(to right, transparent 0, transparent calc(2em - 1px), rgba(178,58,51,.22) calc(2em - 1px), rgba(178,58,51,.22) 2em, transparent 2em),
+    linear-gradient(to right, var(--cinnabar) 0, var(--cinnabar) 1.5px, transparent 1.5px, transparent calc(100% - 1.5px), var(--cinnabar) calc(100% - 1.5px));
+  background-repeat:repeat;
+  background-size:2em 100%, 100% 100%;
+  letter-spacing:.14em;
+  line-height:2;
+  direction:ltr; /* 确保从右向左读的正确顺序由 writing-mode 决定，文字顺序仍是正常 DOM */
+}
+.reader-body.layout-vertical .reader-header{
+  writing-mode:vertical-rl;text-orientation:upright;
+  border-bottom:0;border-left:1px dashed var(--line-strong);
+  margin:0 1.5em 0 0;padding:0 0 1.5em 1em;text-align:center;
+  min-width:4em;display:flex;flex-direction:column-reverse;align-items:center;gap:1em;
+  justify-content:flex-start;
+}
+.reader-body.layout-vertical .reader-header h1.chapter{
+  font-size:1.3em;letter-spacing:.4em;
+}
+.reader-body.layout-vertical .para-block{
+  display:inline-block !important;
+  padding:0 1.2em 0 .4em;margin:0 0 0 0;height:100%;
+  border-bottom:0 !important;
+  border-right:1px dashed var(--line);
+  vertical-align:top;
+  min-width:2em;
+  max-height:calc(100vh - 300px);
+}
+.reader-body.layout-vertical .para-block:last-child{border-right:0;}
+.reader-body.layout-vertical .para-block::before{
+  left:auto;right:-1.4em;top:0;
+}
+.reader-body.layout-vertical .para-original,
+.reader-body.layout-vertical .para-translation{
+  text-indent:0;padding:0;margin:0;height:100%;
+}
+.reader-body.layout-vertical .para-translation{
+  background:rgba(46,91,138,.05);border-left:0;border-top:2px solid var(--stone-blue);
+  margin-top:.4em;
+}
+/* 竖排 + 左右双栏：每段自己列 */
+.reader-body.layout-vertical.parallel-left-right .para-block{
+  grid-template-columns:unset;grid-template-rows:1fr 1fr;display:inline-grid;gap:0;
+}
+
+/* ---------- 注释旁栏 ---------- */
+.reader-note-aside{
+  position:sticky;top:130px;width:260px;max-height:calc(100vh - 160px);overflow:auto;
+  padding:14px;background:var(--card-bg);
+  border:1px solid var(--line);border-radius:var(--radius);
+}
+.aside-title{
+  font-family:var(--serif-heavy);font-size:15px;color:var(--cinnabar);margin-bottom:10px;
+  padding-bottom:6px;border-bottom:1px solid var(--line-strong);
+}
+.note-item{
+  padding:6px 8px;border-radius:4px;margin-bottom:6px;cursor:pointer;
+  border:1px solid transparent;
+}
+.note-item:hover{background:var(--bg-2);}
+.note-item.active{background:rgba(178,58,51,.1);border-color:rgba(178,58,51,.25);}
+.note-item .ref{
+  display:inline-block;margin-right:6px;padding:0 5px;
+  background:var(--cinnabar);color:#fdf3e4;border-radius:3px;
+  font-family:var(--kai);font-size:12px;font-weight:700;
+}
+.note-item .txt{font-family:var(--kai);font-size:13px;color:var(--fg-soft);line-height:1.65;}
+
+/* ---------- 注释气泡 ---------- */
+.note-popover{
+  position:fixed;z-index:150;
+  max-width:320px;padding:10px 14px;
+  background:#fbf4de;border:1px solid var(--cinnabar);border-radius:6px;
+  box-shadow:0 10px 30px rgba(43,43,43,.18);
+  font-family:var(--kai);font-size:13.5px;color:var(--fg);line-height:1.7;
+}
+html[data-theme="night"] .note-popover{background:#2a2d37;}
+.note-popover .hd{
+  color:var(--cinnabar);font-weight:700;margin-bottom:4px;
+  padding-bottom:2px;border-bottom:1px dashed var(--cinnabar-soft);
+}
+
+/* ---------- 抽屉（书签 / 通用） ---------- */
+.drawer[hidden]{display:none !important;}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;width:380px;max-width:90vw;z-index:180;
+  background:var(--card-bg);border-left:1px solid var(--line-strong);
+  box-shadow:0 0 40px rgba(43,43,43,.2);
+  display:flex;flex-direction:column;
+  animation:slide-right .22s ease-out;
+}
+@keyframes slide-right{from{transform:translateX(100%);}to{transform:translateX(0);}}
+.drawer-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;border-bottom:1px solid var(--line-strong);
+}
+.drawer-head h3{font-family:var(--serif-heavy);font-size:18px;color:var(--cinnabar);letter-spacing:.1em;}
+.drawer-body{padding:10px 12px;overflow:auto;flex:1;}
+.bm-item{
+  padding:10px 12px;border-radius:6px;margin-bottom:8px;
+  background:var(--bg-2);border:1px solid var(--line);cursor:pointer;
+  transition:all .15s;
+}
+.bm-item:hover{border-color:var(--cinnabar);}
+.bm-item .bm-head{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;
+}
+.bm-item .bm-book{font-family:var(--serif-heavy);color:var(--fg);font-size:14px;}
+.bm-item .bm-del{
+  background:transparent;border:0;color:var(--fg-muted);cursor:pointer;padding:2px 6px;
+}
+.bm-item .bm-del:hover{color:var(--cinnabar);}
+.bm-item .bm-chapter{font-size:12px;color:var(--fg-soft);margin-bottom:4px;}
+.bm-item .bm-note{font-family:var(--kai);font-size:13px;color:var(--fg-soft);}
+.bm-item .bm-time{font-size:11px;color:var(--fg-muted);margin-top:4px;}
+.bm-empty{text-align:center;padding:30px 10px;color:var(--fg-muted);font-family:var(--kai);}
+
+/* ---------- 浮动上下章（移动端） ---------- */
+.reader-float{
+  position:fixed;left:0;right:0;bottom:16px;
+  display:none;justify-content:space-between;
+  padding:0 16px;pointer-events:none;z-index:40;
+}
+.reader-float .float-btn{
+  pointer-events:auto;
+  width:48px;height:48px;border-radius:50%;
+  background:var(--cinnabar);color:#fff;display:flex;align-items:center;justify-content:center;
+  border:0;box-shadow:0 6px 20px rgba(43,43,43,.2);
+}
+.reader-float .float-btn:disabled{background:var(--fg-muted);box-shadow:none;}
+
+/* 段落高亮（点击书签跳转 / 注释旁栏跳转） */
+.para-block.highlight{background:rgba(178,58,51,.08);border-radius:4px;}
+.para-block.highlight::before{color:var(--cinnabar);}

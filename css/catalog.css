@@ -1,0 +1,190 @@
+/* ===============================================================
+   经典阁 · catalog.css
+   分类浏览 / 搜索结果 / 书籍详情
+   =============================================================== */
+
+/* ---------- 分类页布局 ---------- */
+.catalog-layout{
+  display:grid;grid-template-columns:240px minmax(0,1fr);gap:22px;align-items:start;
+}
+
+/* 分类树 */
+.category-tree{
+  position:sticky;top:84px;max-height:calc(100vh - 110px);overflow:auto;
+  background:var(--card-bg);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px;
+}
+.category-tree h3{
+  font-family:var(--serif-heavy);font-size:17px;color:var(--cinnabar);
+  margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--line-strong);
+}
+.ct-group{margin-bottom:6px;}
+.ct-label{
+  display:flex;align-items:center;justify-content:space-between;gap:6px;
+  padding:6px 8px;border-radius:4px;cursor:pointer;
+  font-family:var(--serif-heavy);font-size:15px;color:var(--fg);
+}
+.ct-label:hover{background:var(--bg-2);}
+.ct-label .chev{transition:transform .2s;}
+.ct-group.collapsed > .ct-label .chev{transform:rotate(-90deg);}
+.ct-group.collapsed > .ct-children{display:none;}
+.ct-children{padding:2px 0 2px 10px;margin-left:4px;border-left:1px dashed var(--line);}
+.ct-sub{
+  display:block;padding:4px 10px;border-radius:3px;cursor:pointer;
+  font-size:14px;color:var(--fg-soft);
+}
+.ct-sub:hover{background:var(--bg-2);color:var(--fg);}
+.ct-sub.active{background:rgba(178,58,51,.12);color:var(--cinnabar);font-weight:700;}
+.ct-sub3{
+  display:block;padding:3px 8px 3px 20px;font-size:13px;color:var(--fg-muted);
+  border-radius:3px;cursor:pointer;
+}
+.ct-sub3:hover{color:var(--fg);background:var(--bg-2);}
+.ct-sub3.active{background:rgba(46,91,138,.1);color:var(--stone-blue);font-weight:700;}
+.ct-count{font-size:12px;color:var(--fg-muted);font-family:var(--kai);}
+
+/* ---------- 书籍详情页 ---------- */
+.book-detail{
+  background:var(--card-bg);border:1px solid var(--line-strong);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:28px 30px;
+}
+.bd-head{
+  display:grid;grid-template-columns:180px 1fr;gap:26px;
+  padding-bottom:22px;border-bottom:1px dashed var(--line-strong);margin-bottom:22px;
+}
+.bd-cover{
+  width:180px;height:240px;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  background:
+    linear-gradient(90deg,var(--paper-deep) 0%,var(--card-bg) 10%,var(--card-bg) 100%);
+  border:1px solid var(--line-strong);border-radius:4px 10px 10px 4px;
+  box-shadow:var(--shadow),inset 10px 0 0 var(--bg-2);
+}
+.bd-cover::before{
+  content:"";position:absolute;left:10px;top:20px;bottom:20px;width:26px;
+  background:var(--cinnabar);border-radius:2px 4px 4px 2px;opacity:.85;
+}
+.bd-cover::after{
+  content:"";position:absolute;right:14px;bottom:14px;width:44px;height:44px;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 56 56'><rect x='3' y='3' width='50' height='50' rx='4' fill='%23f5ecd7' stroke='%23b23a33' stroke-width='2'/><text x='28' y='24' text-anchor='middle' font-family='SimSun,Songti SC,serif' font-weight='900' font-size='16' fill='%23b23a33'>善</text><text x='28' y='44' text-anchor='middle' font-family='SimSun,Songti SC,serif' font-weight='900' font-size='16' fill='%23b23a33'>本</text></svg>");
+  background-size:contain;background-repeat:no-repeat;opacity:.75;
+}
+.bd-cover .glyph{
+  font-family:var(--serif-heavy);font-size:96px;line-height:1;color:var(--fg);
+  text-shadow:0 1px 0 rgba(255,255,255,.2);margin-left:20px;
+}
+.bd-info h1{
+  font-family:var(--serif-heavy);font-size:30px;color:var(--fg);letter-spacing:.15em;
+  margin-bottom:6px;
+}
+.bd-info .bd-sub{
+  font-family:var(--kai);font-size:14px;color:var(--fg-soft);margin-bottom:10px;
+  display:flex;gap:10px 16px;flex-wrap:wrap;
+}
+.bd-info .bd-sub b{font-weight:700;color:var(--fg);}
+.bd-tags{margin-bottom:12px;}
+.bd-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 18px;
+}
+.bd-stat{
+  padding:10px 8px;text-align:center;background:var(--bg-2);
+  border:1px solid var(--line);border-radius:4px;
+}
+.bd-stat .num{font-family:var(--serif-heavy);font-size:18px;color:var(--cinnabar);}
+.bd-stat .lbl{font-family:var(--kai);font-size:12px;color:var(--fg-muted);margin-top:2px;}
+.bd-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.bd-notice{
+  margin-top:14px;padding:10px 14px;
+  background:rgba(178,58,51,.05);border-left:3px solid var(--cinnabar);border-radius:0 4px 4px 0;
+  font-family:var(--kai);font-size:12.5px;color:var(--fg-soft);line-height:1.7;
+}
+
+/* 卷次目录树 */
+.bd-toc-section{margin-top:26px;}
+.bd-toc-section h2{
+  font-family:var(--serif-heavy);font-size:20px;color:var(--fg);margin-bottom:14px;
+  padding-left:10px;border-left:4px solid var(--cinnabar);
+}
+.bd-volume{
+  border:1px solid var(--line);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;
+}
+.bd-volume-head{
+  padding:10px 14px;background:var(--bg-2);cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;
+  font-family:var(--serif-heavy);color:var(--fg);
+}
+.bd-volume-head:hover{background:var(--paper-deep);}
+.bd-volume-head .chev{transition:transform .2s;}
+.bd-volume.collapsed .chev{transform:rotate(-90deg);}
+.bd-volume.collapsed .bd-chapter-grid{display:none;}
+.bd-volume-head .vcount{font-family:var(--kai);color:var(--fg-muted);font-size:13px;font-weight:400;}
+.bd-chapter-grid{
+  padding:10px 12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px;
+}
+.bd-ch{
+  padding:6px 10px;border-radius:4px;cursor:pointer;color:var(--fg-soft);font-size:14px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  border:1px solid transparent;
+}
+.bd-ch:hover{background:var(--bg-2);color:var(--fg);border-color:var(--line);}
+.bd-ch.read{color:var(--stone-blue);}
+.bd-ch.read::before{content:"●";color:var(--stone-blue);margin-right:4px;opacity:.5;}
+.bd-ch.current{background:rgba(178,58,51,.1);color:var(--cinnabar);font-weight:700;}
+
+/* ---------- 搜索结果页 ---------- */
+.search-head{
+  margin-bottom:16px;padding:14px 18px;background:var(--card-bg);
+  border:1px solid var(--line);border-radius:var(--radius);
+}
+.search-head h1{font-family:var(--serif-heavy);font-size:22px;color:var(--fg);}
+.search-head h1 .k{color:var(--cinnabar);}
+.search-head .meta{font-family:var(--kai);color:var(--fg-muted);font-size:13px;margin-top:4px;}
+.search-scope{
+  display:inline-flex;gap:4px;margin-top:10px;
+  padding:3px;background:var(--bg-2);border-radius:999px;
+}
+.search-scope button{
+  padding:4px 12px;border:0;background:transparent;border-radius:999px;
+  font-family:var(--kai);font-size:13px;color:var(--fg-soft);cursor:pointer;
+}
+.search-scope button.active{background:var(--cinnabar);color:#fdf3e4;}
+.search-history{
+  margin:10px 0 20px;padding:10px 12px;background:var(--card-bg);
+  border:1px dashed var(--line-strong);border-radius:var(--radius);
+  font-family:var(--kai);
+}
+.sh-label{color:var(--fg-muted);font-size:13px;margin-right:8px;}
+.sh-item{
+  display:inline-block;padding:2px 10px;margin:3px 4px 3px 0;
+  background:var(--bg-2);border-radius:999px;color:var(--fg-soft);cursor:pointer;font-size:13px;
+}
+.sh-item:hover{color:var(--cinnabar);}
+.sh-clear{
+  display:inline-block;padding:2px 8px;margin-left:8px;font-size:12px;
+  color:var(--fg-muted);cursor:pointer;
+}
+.sh-clear:hover{color:var(--cinnabar);}
+.search-res-list{display:flex;flex-direction:column;gap:12px;}
+.sr-item{
+  padding:14px 16px;background:var(--card-bg);
+  border:1px solid var(--line);border-radius:var(--radius);cursor:pointer;
+  transition:all .15s;
+}
+.sr-item:hover{border-color:var(--cinnabar);box-shadow:var(--shadow);}
+.sr-head{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;
+}
+.sr-type{
+  display:inline-block;padding:1px 8px;border-radius:3px;font-family:var(--kai);font-size:12px;
+  background:rgba(46,91,138,.08);color:var(--stone-blue);
+}
+.sr-type.title{background:rgba(178,58,51,.08);color:var(--cinnabar);}
+.sr-type.author{background:rgba(122,76,27,.08);color:#7a4c1b;}
+.sr-type.note{background:rgba(46,91,38,.08);color:#2f5c2a;}
+.sr-book{font-family:var(--serif-heavy);color:var(--fg);}
+.sr-chapter{color:var(--fg-soft);font-size:13px;}
+.sr-snippet{
+  font-family:var(--kai);font-size:14px;color:var(--fg-soft);line-height:1.8;
+  padding:6px 10px;background:var(--bg-2);border-radius:4px;
+}
+.sr-snippet mark{background:rgba(178,58,51,.22);color:var(--fg);padding:0 2px;border-radius:2px;}

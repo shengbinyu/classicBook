@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <defs>
+    <pattern id="yunwen-pat" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M0 40 C10 25 20 55 40 40 C60 25 70 55 80 40" fill="none" stroke="#2b2b2b" stroke-width="0.6" opacity="0.25"/>
+      <path d="M-40 20 C-30 5 -20 35 0 20 C20 5 30 35 40 20" fill="none" stroke="#2b2b2b" stroke-width="0.6" opacity="0.25"/>
+      <path d="M-20 65 C-10 50 0 80 20 65 C40 50 50 80 60 65 C80 50 90 80 100 65" fill="none" stroke="#2b2b2b" stroke-width="0.6" opacity="0.25"/>
+    </pattern>
+  </defs>
+  <rect width="160" height="160" fill="url(#yunwen-pat)"/>
+</svg>
